@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body class="d-flex align-items-center justify-content-center vh-100">
+    <div class="container text-center">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card shadow-lg p-4">
+                    <h2 class="mb-4">Login</h2>
+                    <div id="error-box" class="alert alert-danger d-none"></div>
+
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <input type="text" id="username" class="form-control" placeholder="Login" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" id="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Log in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("login-form").addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            try {
+                const response = await fetch("/login", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    window.location.href = "/profile";
+                } else {
+                    const errorBox = document.getElementById("error-box");
+                    errorBox.textContent = data.error || "Auth err";
+                    errorBox.classList.remove("d-none");
+                    console.warn("Auth err:", data);
+                }
+            } catch (err) {
+                console.error("Request err:", err);
+            }
+        });
+    </script>
+</body>
+</html>
+
