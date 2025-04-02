@@ -75,7 +75,7 @@ The project includes a `.env` file in the repository.
 Want to understand how it works in-depth?
 
 👉 Read the full article:  
-[**Web Cache Deception in Action: Realistic PoC with Flask + NGINX**](https://your-article-link.com)
+[**Web Cache Deception in Action: Realistic PoC with Flask + NGINX**](https://medium.com/@bogdan.yaroslav19977991/web-cache-deception-in-action-realistic-poc-with-flask-nginx-5beeefe14943)
 
 Includes step-by-step attack breakdown, diagrams, protection strategies, and more.
 
